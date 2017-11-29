@@ -1,0 +1,66 @@
+---
+
+# https://codeshare.io/5MbdOQ
+
+swagger: "2.0"
+info:
+  title: Service Catalog
+  description: REST API for Service Catalog
+  version: 1.0.0
+
+host: api.to-be-defined.com
+basePath: /v1
+schemes:
+  - https
+
+paths:
+
+  /resources:
+
+    get:
+      summary: Read all resources
+      responses:
+        200:
+          description: OK
+
+    post:
+      summary: Create new resource
+      parameters:
+        - name: in
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Resource"
+      responses:
+        200:
+          description: OK
+        400:
+          description: Invalid or incomplete resource
+
+
+  /resources/{name}:
+    get:
+      summary: Read a single service
+      parameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Service is returned
+          schema:
+            $ref: "#/definitions/Resource"
+          
+
+definitions:
+  Resource:
+    type: object
+    properties:
+      name:
+        type: string
+      location:
+        type: string
+
